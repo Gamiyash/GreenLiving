@@ -1,0 +1,357 @@
+<!-- In views/product.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+  href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
+  rel="stylesheet"
+/>
+  <title><%= product.sl_title %></title>
+<style>
+  .product-detail {
+    display: flex;
+    flex-direction: row;
+  
+  }
+ 
+img{
+  margin-left: 10px;
+    width: 600px;
+    object-fit: contain;
+    height: 90vh;
+
+}
+.detail{
+    display: flex;
+    flex-direction: column;
+    padding-left: 60px;
+    padding-top: 50px;
+    overflow: auto;
+   
+}
+.product-price{
+    font-size: 20px;
+    color: green;
+    display: flex;
+    width: fit-content;
+    text-decoration: underline;
+}
+.product-oldprice{
+  display: flex;
+  font-size: 20px;
+  color: rgba(255, 0, 0, 0.694);
+  width: fit-content;
+margin-right: 15px;
+
+}
+#back{
+    margin-left: 30px;
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+    cursor: pointer;
+}
+.product-title{
+  font-size: 30px;
+}
+.product-description{
+  font-size: 20px;
+  margin: 10px 0;
+}
+.price{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+font-size: 20px;
+  
+}
+.des{
+  font-weight: bold;
+  margin-right: 20px;
+  padding: 10px;
+}
+.pd{
+padding: 20px;
+margin: 10px;
+}
+.about-title{
+  font-weight: bold;
+  font-size: 25px;
+  padding: 10px;
+}
+.about-data{
+  padding: 15px;
+}
+.comment-section {
+      margin-top: 40px;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+    }
+    .comment-form {
+      margin-bottom: 20px;
+    }
+    .comment-list {
+      list-style-type: none;
+      padding: 0;
+    }
+    .comment-item {
+      background-color: white;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 4px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .dark-mode{
+      background-color: black;
+    }
+    .dark-mode .txt{
+      color: white;
+    }
+    .dark-mode .comment-section{
+      background-color: black;
+      color: white;
+    
+    }
+    .dark-mode #comments-section{
+      background-color: rgb(5, 4, 4);
+      color: white;
+    
+    }
+    .dark-mode #comment-input{
+      background-color: rgb(0, 0, 0);
+      color: rgb(255, 255, 255);
+    
+    }
+    .dark-mode #comment-form{
+  background-color: rgb(6, 6, 6);
+  color: white;
+}
+ .dark-mode #user-comments{
+  background-color: rgb(11, 11, 11);
+  color: #f4f4f4;
+  margin: 20px 0;
+ }    
+ .dark-mode .section{
+  margin: 20px 0;
+  background-color: rgba(9, 9, 9, 0.607);
+  width: 100%;
+  border-radius: 10px;
+ }
+ .dark-mode .comment-item{
+  margin: 20px 0;
+  background-color: rgb(3, 3, 3);
+  width: 100%;
+  border-radius: 10px;
+ }
+ .product-detail {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.img {
+  flex: 0 0 40%;
+  max-width: 40%;
+}
+
+.detail {
+  flex: 0 0 55%;
+  max-width: 55%;
+}
+
+.product-image {
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .img,
+  .detail {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+</style>
+</head>
+<body>
+    <button id="back" class="mb-4 text-green-600 hover:text-green-700">
+        ← Back
+      </button>
+      <button id="darkModeToggle" class="dark-mode-toggle-input"></button>
+
+  <div class="product-detail">
+    <div class="img">
+    <img src="<%= product.sl_image %>" alt="<%= product.sl_title %>" class="product-image">
+</div>
+<div class="detail">
+    <h1 class="product-title txt "><%= product.sl_title %></h1>
+    <p class="product-description txt"><%= product.sl_description %></p>
+    <div class="price txt">
+      ₹ <p class="product-oldprice "><strike ><%= product.slold_price %></strike></p>
+      ₹<p class="product-price "><%= product.sl_price %></p>
+  </div>
+  <button
+  class="addit mt-10 px-4 py-2 text-sm font-medium text-center text-white rounded-md bg-gradient-to-bl from-green-600 to-green-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+  data-id="<%= product.id %>"
+  data-name="<%= product.sl_title %>"
+  data-price="<%= product.sl_price %>"
+  data-image="<%= product.sl_image %>"
+>
+  Add to Cart
+</button>
+   <div class="pd">
+    <table>
+   <tr>
+    <td class="des txt">Material:</td>
+    <td class="txt"><%= product.Material %></td>
+   </tr>
+   <tr>
+    <td class="des txt">Colour:</td>
+    <td class="txt"><%= product.Colour %></td>
+   </tr>
+   <tr>
+    <td class="des txt">Special Feature	:</td>
+    <td class="txt"><%= product.Special_Feature	%></td>
+   </tr>
+   <tr>
+    <td class="des txt">Brand:</td>
+    <td class="txt"><%= product.Brand %></td>
+   </tr>
+    </table>
+   </div>
+   <div class="about-item">
+    <h3 class="about-title txt">About this Product</h3>
+    <p class="txt about-data"> <% const aboutItemArray = product.about_item.split(','); %>
+      <% aboutItemArray.forEach(item => { %>
+        <li class="txt">
+      <%= item %> <ul class="txt" style="list-style:decimal-leading-zero; "></ul></li><br>
+      <% }) %></p>
+   </div>
+</div>
+  </div>
+ 
+  <div class="comment-section">
+    <h2 class="text-2xl font-bold mb-4">Comments</h2>
+    <form id="comment-form" class="comment-form">
+      <textarea id="comment-input" class="w-full p-2 border rounded" rows="4" placeholder="Write your comment here"></textarea>
+      <button type="submit" class="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Submit Comment</button>
+    </form>
+    <ul id="comment-list" class="comment-list">
+      <!-- Comments will be dynamically added here -->
+    </ul>
+  </div>
+
+  <script>
+
+function applyDarkModePreference() {
+  const isDarkMode = localStorage.getItem('darkMode') === 'true';
+  const body = document.body;
+
+  if (isDarkMode) {
+    body.classList.add('dark-mode');
+  } else {
+    body.classList.remove('dark-mode');
+  }
+}
+
+window.addEventListener('load', applyDarkModePreference);
+document.addEventListener("DOMContentLoaded", function () {
+        // Retrieve cart from localStorage or initialize it as an empty array
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        function updateLocalStorage() {
+          localStorage.setItem("cart", JSON.stringify(cart));
+        }
+
+        document.querySelectorAll(".addit").forEach((button) => {
+          button.addEventListener("click", function (event) {
+            event.preventDefault();
+            const item = {
+              id: this.getAttribute("data-id"),
+              name: this.getAttribute("data-name"),
+              price: this.getAttribute("data-price"),
+              image: this.getAttribute("data-image"),
+            };
+            cart.push(item);
+            updateLocalStorage();
+            alert("okay");
+          });
+        });
+      });
+
+    const back = document.getElementById('back');
+
+back.addEventListener('click', () => {
+  window.history.back();
+});
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const commentForm = document.getElementById('comment-form');
+      const commentInput = document.getElementById('comment-input');
+      const commentList = document.getElementById('comment-list');
+
+      commentForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const comment = commentInput.value.trim();
+        if (comment) {
+          try {
+            const response = await fetch('/api/commentss', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                productId: '<%= product._id %>',
+                comment: comment
+              }),
+            });
+            if (response.ok) {
+              const newComment = await response.json();
+              addCommentToList(newComment);
+              commentInput.value = '';
+            } else {
+              console.error('Failed to submit comment');
+            }
+          } catch (error) {
+            console.error('Error:', error);
+          }
+        }
+      });
+
+      function addCommentToList(comment) {
+        const li = document.createElement('li');
+        li.className = 'comment-item';
+        li.innerHTML = `
+          <p><strong>${comment.userName}</strong></p>
+          <p>${comment.comment}</p>
+          <small>${new Date(comment.createdAt).toLocaleString()}</small>
+        `;
+        commentList.prepend(li);
+      }
+
+      // Load existing comments
+      async function loadComments() {
+        try {
+          const response = await fetch(`/api/commentss?productId=<%= product._id %>`);
+          if (response.ok) {
+            const comments = await response.json();
+            comments.forEach(addCommentToList);
+          } else {
+            console.error('Failed to load comments');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      }
+
+      loadComments();
+    });
+  </script>
+</body>
+</html>

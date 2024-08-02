@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Blog</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+<style>
+    .item{
+    background-color: rgba(27, 211, 27, 0.11) ;
+    color: white;
+    padding-left:10px ;
+}
+.item:hover{
+    background-color: rgba(64, 235, 64, 0.217) ;
+    color: white;
+}
+</style>
+</head>
+<body class="h-full">
+    <div class="flex h-screen bg-green-50">
+     <%- include('deshbordsidebar') %>
+        </div>
+        <div class="ml-64 p-8 w-full">
+            <h1 class="text-3xl font-bold text-green-800 mb-4">Add Items</h1>
+            <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                <form action="/admin/add-item" method="POST" class="w-full">
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-bold mb-2" for="sf_title">
+                            SF Title:
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="sf_title" type="text" name="sf_title" required>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-bold mb-2" for="sf_des">
+                            SF Description:
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="sf_des" type="text" name="sf_description" required>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-bold mb-2" for="sf_price">
+                            SF Price:
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="sf_price" type="text" name="sf_price">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-bold mb-2" for="sfold_price">
+                            SF old Price:
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="sfold_price" type="text" name="sfold_price">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-bold mb-2" for="sf_img">
+                            SF Image Link:
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="sf_img" type="url" name="sf_image">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-bold mb-2" for="sf_link">
+                            SF Link:
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="sf_link" type="url" name="sf_link">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-bold mb-2" for="sl_title">
+                            SL Title:
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="sl_title" type="text" name="sl_title">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-bold mb-2" for="sl_des">
+                            SL Description:
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="sl_des" type="text" name="sl_description">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-bold mb-2" for="sl_price">
+                            SL Price:
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="sl_price" type="text" name="sl_price">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-bold mb-2" for="slold_price">
+                            SL old Price:
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="slold_price" type="text" name="slold_price">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-bold mb-2" for="sl_img">
+                            SL Image Link:
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="sl_img" type="url" name="sl_image">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-bold mb-2" for="sl_link">
+                            SL Link:
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="sl_link" type="url" name="sl_link">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-bold mb-2" for="Brand">
+                            Brand:
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="Brand" type="text" name="Brand">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-bold mb-2" for="Color">
+                            Color:
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="Color" type="text" name="Color">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-bold mb-2" for="Material">
+                            Material:
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="Material" type="text" name="Material">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-bold mb-2" for="Special_Feature">
+                            Special Feature:
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="Special_Feature" type="text" name="Special_Feature">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-bold mb-2" for="about_item">
+                            About Item:
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="about_item" type="text" name="about_item">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-bold mb-2" for="sfabout_item">
+                           SF About Item:
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="sfabout_item" type="text" name="sfabout_item">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-bold mb-2" for="sf_size">
+                           SF Size:
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="sf_size" type="text" name="sf_size">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-bold mb-2" for="sf_brand">
+                            SF Brand:
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="sf_brand" type="text" name="sf_brand">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-bold mb-2" for="sustainability">
+                            Sustainability :
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="sustainability" type="text" name="sustainability">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-bold mb-2" for="sf_colour">
+                            SF colour :
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="sf_colour" type="text" name="sf_colour">
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                            Add Data
+                        </button>
+                    </div>
+                </form>
+                
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarLinks = document.querySelectorAll('.sidebar-link');
+            const currentURL = window.location.pathname;
+    
+            sidebarLinks.forEach(link => {
+                if (link.href.includes(currentURL)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+    
+</body>
+</html>

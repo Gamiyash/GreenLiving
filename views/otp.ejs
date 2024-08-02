@@ -1,0 +1,113 @@
+<!-- views/otp.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter OTP - Green Living</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+      .dark-mode{
+        background-color: black;
+        color: white;
+      }
+      .dark-mode .box{
+        background-color: rgba(15, 15, 15, 0.815);
+      color: white;
+      }
+      
+      .dark-mode .txt{
+     
+      color: white;
+      }
+      .dark-mode .enter{
+     color: rgb(96, 58, 8);
+      }
+    </style>
+</head>
+<body class="bg-gray-100 h-screen flex items-center justify-center">
+  <div>
+    <button id="darkModeToggle" class="dark-mode-toggle-input"></button>
+  </div>
+    <div class="box bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <div class="text-center mb-8">
+            <img src="https://firebasestorage.googleapis.com/v0/b/greenlander-c8556.appspot.com/o/logo-icon.png?alt=media&token=7ee18bf1-5432-452b-8c2d-9eb5668bdc8e" alt="Green Living Logo" class="w-20 h-20 mx-auto mb-4">
+            <h1 class="text-2xl font-bold text-gray-800 txt ">Enter OTP</h1>
+            <p class="text-gray-600 mt-2 txt">We've sent a one-time password to your email</p>
+        </div>
+
+        <form action="/auth/verify-otp" method="post" class="space-y-6">
+            <input type="hidden" name="email" value="<%= email %>" />
+            
+            <div>
+                <label for="otp" class="block text-sm font-medium text-gray-700 mb-2 txt">Enter OTP:</label>
+                <input type="text" name="otp" id="otp" required 
+                       class="enter w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                       placeholder="Enter 6-digit OTP">
+            </div>
+
+            <% if (error) { %>
+                <p class="text-red-600 text-sm"><%= error %></p>
+            <% } %>
+
+            <button type="submit" 
+                    class="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition duration-150 ease-in-out">
+                Verify OTP
+            </button>
+        </form>
+
+        <div class="mt-6 text-center">
+            <p class="text-sm text-gray-600">
+                Didn't receive the OTP? 
+                <a href="#" class="text-green-600 hover:text-green-800 font-medium">Resend OTP</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Optional: Add client-side validation or auto-submission after 6 digits
+        const otpInput = document.getElementById('otp');
+        otpInput.addEventListener('input', function() {
+            if (this.value.length === 6) {
+                // You can auto-submit the form here if desired
+                // document.querySelector('form').submit();
+            }
+        });
+        const darkModeToggle = document.getElementById('darkModeToggle');
+
+function toggleDarkMode() {
+  const body = document.body;
+  body.classList.toggle('dark-mode');
+
+  const isDarkMode = body.classList.contains('dark-mode');
+  localStorage.setItem('darkMode', isDarkMode);
+
+  darkModeToggle.checked = isDarkMode;
+}
+
+function applyDarkModePreference() {
+  const isDarkMode = localStorage.getItem('darkMode') === 'true';
+  const body = document.body;
+
+  if (isDarkMode) {
+    body.classList.add('dark-mode');
+  } else {
+    body.classList.remove('dark-mode');
+  }
+
+  if (darkModeToggle) {
+    darkModeToggle.checked = isDarkMode;
+  }
+}
+
+// Wait for the DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', () => {
+  const darkModeToggle = document.getElementById('darkModeToggle');
+  if (darkModeToggle) {
+    darkModeToggle.addEventListener('click', toggleDarkMode);
+    applyDarkModePreference();
+  }
+});
+    </script>
+</body>
+</html>

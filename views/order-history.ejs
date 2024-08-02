@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order History - Green Living</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .dark-mode {
+            background-color: #2D3748;
+            /* Dark gray background */
+            color: #E2E8F0;
+            /* Light gray text */
+        }
+
+
+        .dark-mode .txt {
+            background-color: #2D3748;
+            /* Dark gray background */
+            color: #E2E8F0;
+            /* Light gray text */
+        }
+    </style>
+</head>
+
+
+<body class="bg-pink-100 text-gray-800 dark-mode:bg-gray-800 dark-mode:text-gray-200">
+    <div class="container mx-auto px-4 py-8 max-w-3xl">
+        <div class="flex justify-between items-center mb-4">
+            <a href="/home" class="text-blue-500 hover:text-blue-700 font-semibold text-lg">Go Home</a>
+        </div>
+        <h1 class="text-3xl font-bold text-center text-gray-900 dark:text-gray-100 mb-6 text-green-500">CURRENT ORDER
+        </h1>
+        <!-- <button id="clearAllButton"
+            class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none mb-4">Clear
+            All</button> -->
+        <div id="checkout-summary" class="space-y-4"></div>
+        <div id="total-amount" class="text-xl font-semibold mt-6 text-right text-gray-900 dark:text-gray-100 pb-4">
+        </div>
+        <div class="text-3xl font-bold text-center space-y-4 pb-4 text-green-500">YOUR PRIVIOUS ORDERS</div>
+        <div id="checkout-summary" class="space-y-4">
+            <% if (orders.length> 0) { %>
+                <% orders.forEach(order=> { %>
+                    <div class="p-4 bg-white dark:bg-gray-700 rounded-lg shadow-sm mb-4">
+                        <!-- <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100">Order ID: <%= order._id %> -->
+                        </h2>
+                        <p class="text-gray-600 dark:text-gray-400">Date: <%= new
+                                Date(order.createdAt).toLocaleDateString() %>
+                        </p>
+                        <li class="flex justify-between items-center p-2 border-b border-gray-200 dark:border-gray-600">
+                            <div>
+                                <h3 class="font-semibold text-gray-800 dark:text-gray-200">
+                                    <%= order.name %>
+                                </h3>
+                                <p class="text-xs text-gray-600 dark:text-gray-400">Price: ₹<%= order.price %> |
+                                        Quantity: <%= order.quantity || 1 %>
+                                </p>
+                            </div>
+                            <div class="font-semibold text-gray-800 dark:text-gray-200">₹<%=order.price * order.quantity
+                                    || order.price %>
+                            </div>
+                        </li>
+
+                    </div>
+                    <% }); %>
+                        <% } else { %>
+                            <p class="text-center text-gray-600 dark:text-gray-400">No orders found.</p>
+                            <% } %>
+        </div>
+
+
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const checkoutSummary = document.getElementById('checkout-summary');
+            const totalAmountElement = document.getElementById('total-amount');
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // function formatDate(dateStr) {
+            //     const timestamp = Date.parse(dateStr);
+            //     const date = new Date(timestamp);
+            //     return isNaN(timestamp) ? 'Date not available' : date.toLocaleDateString();
+            // }
+
+            if (cart.length === 0) {
+                checkoutSummary.innerHTML = '<p class="text-center text-gray-600 dark:text-gray-400">Your cart is empty.</p>';
+                return;
+            }
+            let yourDate = new Date()
+            let d = yourDate.toISOString().split('T')[0]
+
+
+            let total = 0;
+            cart.forEach(item => {
+                let price = parseFloat(item.price);
+                let quantity = parseInt(item.quantity) || 1;
+                // let date = formatDate(item.date);
+
+                if (isNaN(price)) price = 0;
+                if (isNaN(quantity)) quantity = 1;
+
+                const itemTotal = price * quantity;
+                total += itemTotal;
+
+                const cartItem = document.createElement('div');
+                cartItem.className = 'flex justify-between items-center p-4 bg-white dark:bg-gray-700 rounded-lg shadow-sm';
+                cartItem.innerHTML = `
+                    <div>
+                        <h3 class="font-semibold text-md text-gray-800 dark:text-gray-200">${item.name}</h3>
+                        <p class="text-xs text-gray-600 dark:text-gray-400">Price: ₹${price} | Quantity: ${quantity} | Date: ${d}</p>
+                    </div>
+                    <div class="font-semibold text-md text-gray-800 dark:text-gray-200">₹${itemTotal}</div>
+                `;
+                checkoutSummary.appendChild(cartItem);
+            });
+
+            totalAmountElement.textContent = `Total: ₹${total}`;
+
+            // clearAllButton.addEventListener('click', function () {
+
+            //     // localStorage.removeItem('cart');
+            //     // Clear displayed data
+            //     // checkoutSummary.innerHTML = '<p class="text-center text-gray-600 dark:text-gray-400">Your cart is empty.</p>';
+            //     // totalAmountElement.textContent = 'Total: ₹0';
+
+            //     // Send request to delete all orders from the database
+            //     fetch('/clear-orders', {
+            //         method: 'DELETE'
+            //     })
+            //         .then(response => response.json())
+            //         .then(data => console.log('Orders cleared:', data))
+            //         .catch(error => console.error('Error clearing orders:', error));
+            // });
+
+            clearAllButton.addEventListener('click', function () {
+                fetch('/api/clear-orders', {
+                    method: 'DELETE'
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            return response.text(); // Get response as text if not OK
+                        }
+                        return response.json(); // Otherwise, parse as JSON
+                    })
+                    .then(data => {
+                        console.log('Orders cleared:', data);
+                    })
+                    .catch(error => {
+                        console.error('Error clearing orders:', error);
+                    });
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>

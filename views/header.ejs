@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='icon' type='image/png'
+    href='https://firebasestorage.googleapis.com/v0/b/greenlander-c8556.appspot.com/o/logo-icon.png?alt=media&token=7ee18bf1-5432-452b-8c2d-9eb5668bdc8e'
+    class="custom-icon">
+    <title>Document</title>
+    <style>
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: white;
+        }
+        .top {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            font-family: "Nunito", sans-serif;
+        }
+        .logo img {
+            width: 70px;
+            height: 70px;
+            margin-right: 0.5rem;
+        }
+        nav {
+            width: 70vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        nav ul {
+            display: flex;
+            list-style-type: none;
+            gap: 2rem;
+        }
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-family: "Nunito", sans-serif;
+            font-weight: 500;
+            font-size: larger;
+        }
+        .user-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        .user-actions>p {
+            display: flex;
+            gap: 1rem;
+            width: fit-content;
+            background-color: #3d7a4ab9;
+            border-radius: 6px;
+            padding: 10px;
+            color: #010f06;
+        }
+        .login-btn {
+            background-color: #e8f2eb;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            margin: 4px 0;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-toggle {
+            background-color: #f1f1f1;
+            color: #333;
+            padding: 8px 16px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: first baseline;
+        }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 20px 20px 10px 10px;
+        }
+        .dropdown-menu p {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-menu a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-menu a:hover {
+            background-color: #f1f1f1;
+        }
+        .dark-mode {
+            background: black;
+            color: #e6e6e6;
+        }
+        .dark-mode .login-container {
+            background: rgba(34, 34, 34, 0.8);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+        .dark-mode .logo-txt {
+            color: black;
+        }
+        .dark-mode .user-actions {
+            color: black;
+        }
+        .dark-mode .user-action > button {
+            color: black;
+            border: black;
+        }
+        .dark-mode input[type="email"],
+        .dark-mode input[type="password"] {
+            background: #333;
+            color: #e6e6e6;
+            border-color: #444;
+        }
+        .dark-mode button[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+        }
+        .cart-btn {
+            height: fit-content;
+            background-color: #e8f2eb;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .cartbtn {
+            cursor: pointer;
+        }
+        .cartbtn img {
+            width: 40px;
+            height: 40px;
+        }
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1rem;
+               
+            }
+            .top{
+                display: flex;
+                justify-content: space-around;
+            }
+            .logo {
+                margin-bottom: 1rem;
+            }
+            .logo>img {
+                width: 100px;
+                height: 100px;
+            }
+            nav {
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100%;
+                background-color: white;
+                z-index: 1000;
+                padding-top: 2rem;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .hamburger {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="top">
+            <div class="logo">
+                <img src="https://firebasestorage.googleapis.com/v0/b/greenlander-c8556.appspot.com/o/logo-icon.png?alt=media&token=7ee18bf1-5432-452b-8c2d-9eb5668bdc8e"
+                    alt="Green Living Logo">
+                <span class="logo-txt">Green Living</span>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <nav id="nav">
+                <ul>
+                    <li><a href="/shop" class="shop">Shop</a></li>
+                    <li><a href="/about" class="about">About</a></li>
+                    <li><a class="learn" href="/blog">Learn</a></li>
+                    <li><a href="/event" class="event">Get Involved</a></li>
+                </ul>
+            
+        </div>
+     
+        <div class="user-actions">
+            <% if (user) { %>
+                <div class="dropdown">
+                    <button
+                        class="dropdown-toggle inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-4 py-2">
+                        <%= user.username %>
+                    </button>
+                    <div class="dropdown-menu">
+                        <p>Email: <%= user.email %>
+                        </p>
+                        <p>Username: <%= user.username %>
+                        </p>
+                        <a href="/user-profile">Profile</a>
+                        <a href="/auth/logout">Logout</a>
+                    </div>
+                </div>
+                <button class="cartbtn" id="cartButton">
+                    <img src="https://cdn-icons-png.freepik.com/256/17123/17123527.png?ga=GA1.1.190826024.1720511253&semt=ais_hybrid" alt="Shopping Cart">
+                </button>
+            <% } else { %>
+                <a href="login"><button
+                        class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
+                        Log in
+                    </button></a>
+                <button
+                    class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-4 py-2">
+                    Guest!
+                </button>
+            <% } %>
+            <div class="dark-mode-toggle">
+                <button id="darkModeToggle" class="dark-mode-toggle-input">Dark Mode</button>
+            </div>
+        </nav>
+        </div>
+    </header>
+    <script>
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const hamburger = document.getElementById('hamburger');
+        const nav = document.getElementById('nav');
+
+        function toggleDarkMode() {
+            const body = document.body;
+            body.classList.toggle('dark-mode');
+            const isDarkMode = body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode);
+            darkModeToggle.checked = isDarkMode;
+        }
+
+        function applyDarkModePreference() {
+            const isDarkMode = localStorage.getItem('darkMode') === 'true';
+            const body = document.body;
+            if (isDarkMode) {
+                body.classList.add('dark-mode');
+            } else {
+                body.classList.remove('dark-mode');
+            }
+            if (darkModeToggle) {
+                darkModeToggle.checked = isDarkMode;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (darkModeToggle) {
+                darkModeToggle.addEventListener('click', toggleDarkMode);
+                applyDarkModePreference();
+            }
+
+           
+            if (hamburger) {
+  hamburger.addEventListener('click', () => {
+    nav.style.display = nav.style.display === 'none' || nav.style.display === '' ? 'flex' : 'none';
+
+    if (!nav.querySelector('.cancel-button')) {
+      const cancelButton = document.createElement('button');
+      cancelButton.textContent = 'Cancel';
+      cancelButton.classList.add('cancel-button');
+      nav.appendChild(cancelButton);
+
+      cancelButton.addEventListener('click', () => {
+        nav.style.display = 'none';
+      });
+    }
+  });
+}
+        // Add cancel button
+
+        const dropdownToggle = document.querySelector('.dropdown-toggle');
+        const dropdownMenu = document.querySelector('.dropdown-menu');
+
+        dropdownToggle.addEventListener('click', function () {
+            dropdownMenu.style.display = dropdownMenu.style.display === 'none' ? 'block' : 'none';
+        });
+
+        window.addEventListener('click', function (event) {
+            if (!event.target.matches('.dropdown-toggle')) {
+                dropdownMenu.style.display = 'none';
+            }
+        });
+
+        const cart = document.getElementById('cartButton');
+        cart.addEventListener('click', () => {
+            window.location.href = "/cart";
+        });
+    })
+    </script>
+</body>
+</html>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='icon' type='image/png'
+        href='https://firebasestorage.googleapis.com/v0/b/greenlander-c8556.appspot.com/o/logo-icon.png?alt=media&token=7ee18bf1-5432-452b-8c2d-9eb5668bdc8e'
+        class="custom-icon">
+    <title>Cart</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .head {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #2c3e50;
+        }
+
+        #cart-display {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .cart-item {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .cart-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .cart-item-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .cart-item-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-item-name {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            color: #e74c3c;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .cart-item-quantity input {
+            width: 50px;
+            text-align: center;
+            margin-right: 10px;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .update-quantity {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .update-quantity:hover {
+            background-color: #2980b9;
+        }
+
+        .cart-item-delete {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .cart-item-delete:hover {
+            background-color: #c0392b;
+        }
+
+        #clearall {
+            background-color: #2c3e50;
+            color: white;
+            font-size: 1em;
+        }
+
+        #clearall:hover {
+            background-color: #34495e;
+            box-shadow: 2px 2px rgb(2, 38, 122);
+            transform: translateY(-1px);
+        }
+
+        #buy {
+            background-color: darkgreen;
+            color: beige;
+            font-size: 1em;
+        }
+
+        #buy:hover {
+            background-color: rgba(3, 88, 3, 0.852);
+            color: beige;
+            box-shadow: 2px 2px green;
+            transform: translateY(-1px);
+        }
+
+        .dark-mode {
+            background-color: #222;
+            color: #e6e6e6;
+        }
+
+        .dark-mode .head h1 {
+            color: #fff;
+        }
+
+        .dark-mode .cart-item {
+            background-color: #333;
+            box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+        }
+
+        .dark-mode .cart-item-price {
+            color: #ff6b6b;
+        }
+
+        .dark-mode .cart-item-quantity input {
+            background-color: #444;
+            color: #e6e6e6;
+            border: 1px solid #666;
+        }
+
+        .dark-mode .update-quantity {
+            background-color: #4d88ff;
+            color: #e6e6e6;
+        }
+
+        .dark-mode .update-quantity:hover {
+            background-color: #3a78e8;
+        }
+
+        .dark-mode .cart-item-delete {
+            background-color: #ff6b6b;
+            color: #e6e6e6;
+        }
+
+        .dark-mode .cart-item-delete:hover {
+            background-color: #e84c4c;
+        }
+
+        .dark-mode #clearall {
+            background-color: #4d88ff;
+            color: #e6e6e6;
+        }
+
+        .dark-mode #clearall:hover {
+            background-color: #3a78e8;
+            box-shadow: 2px 2px rgba(77, 136, 255, 0.5);
+        }
+
+        .dark-mode #buy {
+            background-color: #4caf50;
+            color: #e6e6e6;
+        }
+
+        .dark-mode #buy:hover {
+            background-color: #3d8c40;
+            box-shadow: 2px 2px rgba(76, 175, 80, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="head">
+            <h1>Your Cart</h1>
+            <div id="clear">
+                <button id="clearall" onclick="clearCart()">Clear All</button>
+            </div>
+            <div id="check-out">
+                <button id="buy" onclick="">Check Out</button>
+            </div>
+        </div>
+        <div id="cart-display"></div>
+    </div>
+
+    <script>
+        //          document.addEventListener("DOMContentLoaded", function () {
+        //             // Attach event listener in JavaScript
+        //             document.getElementById('buy').addEventListener('click', redirectToCheckout);
+
+        //             function redirectToCheckout() {
+        //                 window.location.href = '/checkout';
+        //             }
+        //         });
+        //         document.addEventListener("DOMContentLoaded", function() {
+        //             const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        //             const cartDisplay = document.getElementById('cart-display');
+
+        //             function updateLocalStorage() {
+        //                 localStorage.setItem('cart', JSON.stringify(cart));
+        //             }
+
+        //             function updateCartDisplay() {
+        //                 cartDisplay.innerHTML = '';
+
+        //                 if (cart.length === 0) {
+        //                     cartDisplay.innerHTML = '<p>Your cart is empty.</p>';
+        //                     return;
+        //                 }
+
+        //                 cart.forEach((item, index) => {
+        //                     const cartItem = document.createElement('div');
+        //                     cartItem.classList.add('cart-item');
+        //                     cartItem.innerHTML = `
+        //                         <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+        //                         <div class="cart-item-info">
+        //                             <div class="cart-item-name">${item.name}</div>
+        //                             <div class="cart-item-price">₹${item.price}</div>
+        //                             <div class="cart-item-quantity">
+        //                                 <input type="number" value="${item.quantity || 1}" min="1" data-index="${index}">
+        //                                 <button class="update-quantity" data-index="${index}">Update</button>
+        //                             </div>
+        //                             <button class="cart-item-delete" data-index="${index}">Delete</button>
+        //                         </div>
+        //                     `;
+        //                     cartDisplay.appendChild(cartItem);
+        //                 });
+
+        //                 document.querySelectorAll('.cart-item-delete').forEach(button => {
+        //                     button.addEventListener('click', function() {
+        //                         const index = this.getAttribute('data-index');
+        //                         cart.splice(index, 1);
+        //                         updateLocalStorage();
+        //                         updateCartDisplay();
+        //                     });
+        //                 });
+
+        //                 document.querySelectorAll('.update-quantity').forEach(button => {
+        //                     button.addEventListener('click', function() {
+        //                         const index = this.getAttribute('data-index');
+        //                         const quantityInput = document.querySelector(`input[data-index="${index}"]`);
+        //                         const quantity = parseInt(quantityInput.value);
+        //                         if (quantity > 0) {
+        //                             cart[index].quantity = quantity;
+        //                             updateLocalStorage();
+        //                             updateCartDisplay();
+        //                         }
+        //                     });
+        //                 });
+        //             }
+
+        //             updateCartDisplay();
+
+        //             window.clearCart = function() {
+        //                 localStorage.clear();
+        //                 updateCartDisplay();
+        //             }
+        //         });
+        //         function applyDarkModePreference() {
+        //   const isDarkMode = localStorage.getItem('darkMode') === 'true';
+        //   const body = document.body;
+
+        //   if (isDarkMode) {
+        //     body.classList.add('dark-mode');
+        //   } else {
+        //     body.classList.remove('dark-mode');
+        //   }
+        // }
+
+        // window.addEventListener('load', applyDarkModePreference);
+
+        // Attach event listener in JavaScript
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById('buy').addEventListener('click', redirectToCheckout);
+
+            function redirectToCheckout() {
+                window.location.href = '/checkout';
+            }
+        });
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartDisplay = document.getElementById('cart-display');
+
+        function updateCartDisplay() {
+            cartDisplay.innerHTML = '';
+
+            if (cart.length === 0) {
+                cartDisplay.innerHTML = '<p>Your cart is empty.</p>';
+                return;
+            }
+
+            cart.forEach((item, index) => {
+                const cartItem = document.createElement('div');
+                cartItem.classList.add('cart-item');
+                cartItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-price">₹${item.price}</div>
+                        <div class="cart-item-quantity">
+                            <input type="number" value="${item.quantity || 1}" min="1" data-index="${index}">
+                            <button class="update-quantity" data-index="${index}">Update</button>
+                        </div>
+                        <button class="cart-item-delete" data-index="${index}">Delete</button>
+                    </div>
+                `;
+                cartDisplay.appendChild(cartItem);
+            });
+
+            document.querySelectorAll('.cart-item-delete').forEach(button => {
+                button.addEventListener('click', function () {
+                    const index = this.getAttribute('data-index');
+                    cart.splice(index, 1);
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    updateCartDisplay();
+                });
+            });
+
+            document.querySelectorAll('.update-quantity').forEach(button => {
+                button.addEventListener('click', function () {
+                    const index = this.getAttribute('data-index');
+                    const quantityInput = document.querySelector(`input[data-index="${index}"]`);
+                    const quantity = parseInt(quantityInput.value);
+                    if (quantity > 0) {
+                        cart[index].quantity = quantity;
+                        localStorage.setItem('cart', JSON.stringify(cart));
+                        updateCartDisplay();
+                    }
+                });
+            });
+        }
+
+        updateCartDisplay();
+
+    </script>
+</body>
+
+</html>

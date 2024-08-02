@@ -1,0 +1,622 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Living</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f7fcfa;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: white;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .logo img {
+            width: 24px;
+            height: 24px;
+            margin-right: 0.5rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style-type: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .login-btn {
+            background-color: #e8f2eb;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .cart-btn {
+            background-color: #e8f2eb;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .cart-btn img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .hero {
+            background-image: url('https://firebasestorage.googleapis.com/v0/b/greenlander-c8556.appspot.com/o/nature%20tree%20(2).jpg?alt=media&token=31ebe14a-602c-4c50-9441-9ceea431daa6');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+            border-radius: 16px;
+            margin: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #02200e;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin-bottom: 2rem;
+            color: #02200e;
+
+        }
+
+        .maintxt {
+            height: 40%;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(2.8px);
+            -webkit-backdrop-filter: blur(2.8px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+
+        }
+
+        .cta-btn {
+            background-color: #4f965e;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background-color: #3d7a4a;
+        }
+
+        /* for wast managment section*/
+        /* General Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #2f5437;
+        }
+
+        /* Waste Management Section */
+        .articles-container {
+            width: 80vw;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            /* Updated to display two columns */
+            gap: 2rem;
+        }
+
+        .article-card {
+            background-color: #f8f8f8;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .article-image img {
+            width: 100%;
+            height: fit-content;
+            padding-top: 30px;
+            object-fit: cover;
+            display: flex;
+            justify-content: center;
+
+        }
+
+        .article-content {
+            padding: 1.5rem;
+        }
+
+        .article-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #4f965e;
+        }
+
+        .article-author {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .article-author span {
+            color: #27ae60;
+            text-decoration: underline;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #4f965e;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #3d7a4a;
+        }
+
+        /* Animation */
+
+        .article-card.animate {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+
+        /* for ucoming event section */
+        /* General Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Events Section */
+        /* General Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #4f965e;
+        }
+
+        /* Events Section */
+        .events-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .event-card {
+            background-color: #f8f8f8;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .event-image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .event-details {
+            padding: 1.5rem;
+        }
+
+        .event-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #4f965e;
+        }
+
+        .event-description {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #4f965e;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #3d7a4a;
+        }
+
+
+        /* product */
+
+        .product {
+            padding: 0 40px;
+            margin-top: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .product-card h3 {
+            margin: 10px 0;
+            font-size: 1.5rem;
+            color: #2c3e50;
+        }
+
+        .product-card p {
+            margin-bottom: 10px;
+            color: #7f8c8d;
+        }
+
+        .product-card .price {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .product-card .btn {
+            background-color: #4f965e;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .product-card .btn:hover {
+            background-color: #3d7a4a;
+        }
+
+        footer {
+            background-color: #f8f8f8;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        /* Make products responsive */
+        @media (max-width: 768px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        /*css for product page end */
+
+        /*footer*/
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo img {
+            width: 30px;
+            height: 30px;
+            margin-right: 0.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #4f965e;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-social a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            color: #4f965e;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://cdn-icons-png.flaticon.com/512/447/447949.png" alt="Logo">
+            Green Living
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="user-actions">
+            <% if (user) { %>
+            <div>Welcome, <%= user.username %></div>
+            <% } %>
+            <button class="login-btn"><a href="/login">Login</a></button>
+            <button class="cart-btn"><img src="https://img.icons8.com/material-outlined/24/000000/shopping-cart.png"
+                    alt="Cart"></button>
+        </div>
+    </header>
+    <div class="hero">
+        <div class="maintxt">
+            <h1>Welcome to Green Living</h1>
+            <p>Discover sustainable products and learn more about eco-friendly practices to make your life greener and
+                more sustainable.</p>
+            <button class="cta-btn">Shop Now</button>
+        </div>
+    </div>
+    <div class="container">
+        <section>
+            <h2 class="section-title">Waste Management Articles</h2>
+            <div class="articles-container">
+                <div class="article-card">
+                    <div class="article-image">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/greenlander-c8556.appspot.com/o/recycling.jpg?alt=media&token=be94a1b6-1dc3-4e4d-ae47-6c18eb8e3d62"
+                            alt="Article Image">
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">The Importance of Recycling</h3>
+                        <p class="article-author">by <span>John Doe</span></p>
+                        <a href="#" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+                <div class="article-card">
+                    <div class="article-image">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/greenlander-c8556.appspot.com/o/compost.jpg?alt=media&token=2f74b5b7-74fc-45f6-8463-6f681924ca35"
+                            alt="Article Image">
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Composting 101: A Beginner's Guide</h3>
+                        <p class="article-author">by <span>Jane Smith</span></p>
+                        <a href="#" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Upcoming Events</h2>
+            <div class="events-container">
+                <div class="event-card">
+                    <div class="event-image">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/greenlander-c8556.appspot.com/o/event1.jpg?alt=media&token=a6c2580d-e7be-4a7b-bd3a-6a356eb88c88"
+                            alt="Event Image">
+                    </div>
+                    <div class="event-details">
+                        <h3 class="event-title">Sustainable Living Workshop</h3>
+                        <p class="event-description">Join us for a workshop on sustainable living practices and learn
+                            how to make your life more eco-friendly.</p>
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+                <div class="event-card">
+                    <div class="event-image">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/greenlander-c8556.appspot.com/o/event2.jpg?alt=media&token=5395930e-9b1c-4fe2-b23d-d6a2fbc95f58"
+                            alt="Event Image">
+                    </div>
+                    <div class="event-details">
+                        <h3 class="event-title">Community Clean-Up</h3>
+                        <p class="event-description">Join our community for a clean-up event to help keep our
+                            neighborhood clean and green.</p>
+                        <a href="#" class="btn btn-primary">Join Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="product">
+        <h1>Our Sustainable Products</h1>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="https://firebasestorage.googleapis.com/v0/b/greenlander-c8556.appspot.com/o/eco-bag.jpg?alt=media&token=6c68fc18-68d8-41cf-a9bc-2d7e7ff743dd"
+                    alt="Eco-Friendly Bag">
+                <h3>Eco-Friendly Bag</h3>
+                <p>Carry your groceries with our sustainable eco-friendly bags.</p>
+                <div class="price">$12.99</div>
+                <button class="btn">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="https://firebasestorage.googleapis.com/v0/b/greenlander-c8556.appspot.com/o/biodegradable-straws.jpg?alt=media&token=ceecf0f1-f5ab-4d2d-b312-72a7f7160b1e"
+                    alt="Biodegradable Straws">
+                <h3>Biodegradable Straws</h3>
+                <p>Enjoy your drinks with our biodegradable and eco-friendly straws.</p>
+                <div class="price">$7.99</div>
+                <button class="btn">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="https://cdn-icons-png.flaticon.com/512/447/447949.png" alt="Logo">
+                <h2>Green Living</h2>
+            </div>
+            <div class="footer-links">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Products</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="footer-social">
+                <a href="#"><img
+                        src="https://img.icons8.com/material-outlined/24/ffffff/facebook-new.png" alt="Facebook"></a>
+                <a href="#"><img src="https://img.icons8.com/material-outlined/24/ffffff/twitter.png"
+                        alt="Twitter"></a>
+                <a href="#"><img src="https://img.icons8.com/material-outlined/24/ffffff/instagram-new.png"
+                        alt="Instagram"></a>
+                <a href="#"><img src="https://img.icons8.com/material-outlined/24/ffffff/linkedin.png"
+                        alt="LinkedIn"></a>
+            </div>
+            <p>&copy; 2023 Green Living. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

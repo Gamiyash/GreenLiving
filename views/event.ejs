@@ -1,0 +1,240 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Public+Sans%3Awght%40400%3B500%3B700%3B900"
+    />
+
+    <title><%= event.title %></title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style>
+         .logo{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+      }
+      .back{
+        display: flex;
+        justify-content:left;
+        margin-left: 20vw;
+      }
+      .dark-mode{
+        background-color: black;
+        color: white;
+      }
+      .dark-mode .txt{
+       
+        color: white;
+      }
+      .dark-mode .dot{
+        background-color: rgb(4, 89, 20);
+      }
+    </style>
+  </head>
+  <body>
+  
+                
+    <!-- <div class="back">
+        <a href="../index.html">Back</a>
+    </div>
+   -->
+   <div >
+   <button id="darkModeToggle" class="dark-mode-toggle-input"></button>
+   </div>
+        <div class="px-40 flex flex-1 justify-center py-5">
+          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+            <div class="@container">
+              <div class="@[480px]:px-4 @[480px]:py-3">
+                <div
+                  class="w-full bg-center bg-no-repeat bg-cover flex flex-col justify-end overflow-hidden bg-[#f8fcf9] @[480px]:rounded-xl min-h-80"
+                 
+                ><img src='<%= event.mainimg %>' alt=""></div>
+              </div>
+            </div>
+            <div class="flex flex-wrap justify-between gap-3 p-4">
+              <div class="flex min-w-72 flex-col gap-3">
+                <p class=" txt text-[#0e1b11] text-4xl font-black leading-tight tracking-[-0.033em]"><%= event.title %></p>
+                <p class="text-[#4e975f] text-base font-normal leading-normal"><%= event.date %></p>
+              </div>
+            </div>
+            <div class="flex px-4 py-3 justify-end">
+              <button
+                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#e7f3ea] text-[#0e1b11] text-sm font-bold leading-normal tracking-[0.015em]"
+              >
+              <a href="#" class="add-to-calendar" data-event-name="<%= event.title  %>" data-event-description="<%= event.title  %>" data-event-start="<%= event.date  %>" data-event-end="<%= event.date  %>"> <span class="truncate">Add to calendar</span></a>
+              </button>
+            </div>
+            <div class="flex flex-col gap-3 p-4">
+              <!-- <div class="flex gap-6 justify-between">
+                <p class="text-[#0e1b11] text-base font-medium leading-normal">Registration</p>
+                <p class="text-[#0e1b11] text-sm font-normal leading-normal">50%</p>
+              </div> -->
+              <!-- <div class="rounded bg-[#d0e7d5]"><div class="h-2 rounded bg-[#17cf42]" style="width: 50%;"></div></div> -->
+              <!-- <p class="text-[#4e975f] text-sm font-normal leading-normal"></p>
+            </div> -->
+            <h2 class=" txt text-[#0e1b11] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Agenda</h2>
+            <div class="grid grid-cols-[40px_1fr] gap-x-2 px-4">
+              <div class="flex flex-col items-center gap-1 pt-5">
+                <div class="dot size-2 rounded-full bg-[#0e1b11]"></div>
+                <div class="w-[1.5px] bg-[#d0e7d5] h-4 grow"></div>
+              </div>
+              <div class=" txt flex flex-1 flex-col pt-3 pb-5"><p class="txt text-[#0e1b11] text-base font-medium leading-normal"><%= event.agenda1 %></p></div>
+              <div class="flex flex-col items-center gap-1">
+                <div class="w-[1.5px] bg-[#d0e7d5] h-4"></div>
+                <div class="dot size-2 rounded-full bg-[#0e1b11]"></div>
+                <div class="w-[1.5px] bg-[#d0e7d5] h-4 grow"></div>
+              </div>
+              <div class="txt flex flex-1 flex-col pt-3 pb-5"><p class="txt text-[#0e1b11] text-base font-medium leading-normal"><%= event.agenda2 %></p></div>
+              <div class=" flex flex-col items-center gap-1">
+                <div class=" w-[1.5px] bg-[#d0e7d5] h-4"></div>
+                <div class="dot size-2 rounded-full bg-[#0e1b11]"></div>
+                <div class="w-[1.5px] bg-[#d0e7d5] h-4 grow"></div>
+              </div>
+              <div class="flex flex-1 flex-col pt-3 pb-5">
+                <p class="txt text-[#0e1b11] text-base font-medium leading-normal"><%= event.agenda3 %></p>
+              </div>
+              <div class="flex flex-col items-center gap-1">
+                <div class="w-[1.5px] bg-[#d0e7d5] h-4"></div>
+                <div class="dot size-2 rounded-full bg-[#0e1b11]"></div>
+                <div class="w-[1.5px] bg-[#d0e7d5] h-4 grow"></div>
+              </div>
+              <div class="flex flex-1 flex-col pt-3 pb-5">
+                <p class="txt text-[#0e1b11] text-base font-medium leading-normal"><%= event.agenda4 %></p>
+              </div>
+              <div class="flex flex-col items-center gap-1 pb-3">
+                <div class="w-[1.5px] bg-[#d0e7d5] h-4"></div>
+                <div class="dot size-2 rounded-full bg-[#0e1b11]"></div>
+              </div>
+              <div class="flex flex-1 flex-col pt-3 pb-5"><p class="txt text-[#0e1b11] text-base font-medium leading-normal"><%= event.agenda5 %></p></div>
+            </div>
+            <h2 class="txt text-[#0e1b11] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Speakers/Guide/Organizer</h2>
+            <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
+              <div class="flex flex-col gap-2 pb-3">
+                <div
+                  class="w-6/12	 bg-center bg-no-repeat aspect-square bg-cover rounded-xl"
+                  style='background-image: url("<%= event.spimg%>");'></div>
+                <div>
+                  <p class="txt text-[#0e1b11] text-base font-medium leading-normal"><%= event.spname %></p>
+                  <p class="text-[#4e975f] text-sm font-normal leading-normal"><%= event.spdes %></p>
+                </div>
+              </div>
+              <div class="flex flex-col gap-3 pb-3">
+                <div
+                  class="w-6/12	 bg-center bg-no-repeat aspect-square bg-cover rounded-xl "
+                  style='background-image: url("");'
+                ></div>
+                <div>
+                  <p class="txt text-[#0e1b11] text-base font-medium leading-normal"><%= event.spname2 %></p>
+                  <p class="text-[#4e975f] text-sm font-normal leading-normal"><%= event.spdes2 %></p>
+                </div>
+              </div>
+             
+            </div>
+            <h2 class="txt text-[#0e1b11] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Location</h2>
+            <div class="flex px-4 py-3">
+             <div>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                  </svg>
+                  
+                <p class="text-emerald-950  font-bold font-sans	"><%= event.loc %> </p>
+             </div>
+            </div>
+            <div class="flex px-4 py-3">
+              <button
+                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 flex-1 bg-[#17cf42] text-[#0e1b11] text-sm font-bold leading-normal tracking-[0.015em]"
+              >
+               <a href="/registration" <span class="truncate">Register Now</span></a>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+   const darkModeToggle = document.getElementById('darkModeToggle');
+
+function toggleDarkMode() {
+  const body = document.body;
+  body.classList.toggle('dark-mode');
+
+  const isDarkMode = body.classList.contains('dark-mode');
+  localStorage.setItem('darkMode', isDarkMode);
+
+  darkModeToggle.checked = isDarkMode;
+}
+
+function applyDarkModePreference() {
+  const isDarkMode = localStorage.getItem('darkMode') === 'true';
+  const body = document.body;
+
+  if (isDarkMode) {
+    body.classList.add('dark-mode');
+  } else {
+    body.classList.remove('dark-mode');
+  }
+
+  if (darkModeToggle) {
+    darkModeToggle.checked = isDarkMode;
+  }
+}
+
+// Wait for the DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', () => {
+  const darkModeToggle = document.getElementById('darkModeToggle');
+  if (darkModeToggle) {
+    darkModeToggle.addEventListener('click', toggleDarkMode);
+    applyDarkModePreference();
+  }
+});
+
+// Get all "Add to Calendar" links
+const addToCalendarLinks = document.querySelectorAll('.add-to-calendar');
+
+// Add a click event listener to each link
+addToCalendarLinks.forEach(function(link) {
+  link.addEventListener('click', function(event) {
+    event.preventDefault();
+
+    // Get the event details from the data attributes
+    const eventName = this.dataset.eventName;
+    const eventDescription = this.dataset.eventDescription;
+    const eventStart = this.dataset.eventStart;
+    const eventEnd = this.dataset.eventEnd;
+
+    // Create the calendar event data
+    const calendarData = `BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
+SUMMARY:${eventName}
+DESCRIPTION:${eventDescription}
+DTSTART:${eventStart}
+DTEND:${eventEnd}
+END:VEVENT
+END:VCALENDAR`;
+
+    // Create a download link for the calendar event
+    const downloadLink = document.createElement('a');
+    downloadLink.href = `data:text/calendar;charset=utf-8,${encodeURIComponent(calendarData)}`;
+    downloadLink.download = `${eventName}.ics`;
+    downloadLink.style.display = 'none';
+
+    // Append the download link to the document and click it
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+
+    // Remove the download link from the document
+    document.body.removeChild(downloadLink);
+  });
+});
+
+    </script>
+  </body>
+</html>

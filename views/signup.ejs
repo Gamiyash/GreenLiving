@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup</title>
+  <style>
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateY(-20px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.05);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      animation: fadeIn 1s ease-out;
+    }
+
+    .signup-container {
+      display: flex;
+      width: 80%;
+      max-width: 800px;
+      background-color: #fff;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      animation: slideIn 0.8s ease-out;
+
+      background: rgba(255, 255, 255, 0.34);
+      border-radius: 16px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(8.1px);
+      -webkit-backdrop-filter: blur(8.1px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .signup-form-wrapper {
+      padding: 40px;
+      flex: 1;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 30px;
+      color: #333;
+      animation: slideIn 0.8s ease-out 0.2s both;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      animation: slideIn 0.8s ease-out 0.4s both;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+      border-color: #4CAF50;
+      outline: none;
+    }
+
+    button[type="submit"] {
+      background-color: #4CAF50;
+      color: #fff;
+      padding: 15px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 20px;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      animation: slideIn 0.8s ease-out 0.6s both;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #45a049;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .error {
+      color: #ff3333;
+      margin-top: 15px;
+      animation: slideIn 0.8s ease-out 0.8s both;
+    }
+
+    .login-link {
+      margin-top: 30px;
+      animation: slideIn 0.8s ease-out 0.8s both;
+    }
+
+    .login-link span {
+      margin-right: 10px;
+      color: #666;
+    }
+
+    .login-link a {
+      color: #4CAF50;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    .login-link a:hover {
+      color: #45a049;
+      text-decoration: underline;
+    }
+
+    .nature-animation {
+      flex: 1;
+      background: url('https://i.pinimg.com/564x/47/ec/3c/47ec3cdf11d2836813897d4919545fc2.jpg') center/cover no-repeat;
+      position: relative;
+      overflow: hidden;
+      background-size: contain;
+    }
+
+    .nature-animation::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(76, 175, 80, 0.1);
+      animation: pulse 3s infinite ease-in-out;
+    }
+
+    .leaf-decoration {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      background: url('/api/placeholder/50/50') center/contain no-repeat;
+      animation: fadeIn 1s ease-out 1s both, pulse 3s infinite ease-in-out;
+    }
+
+    @media (max-width: 768px) {
+      .signup-container {
+        flex-direction: column;
+      }
+
+      .nature-animation {
+        height: 200px;
+      }
+    }
+
+    .leaf {
+      position: absolute;
+
+      position: absolute;
+      background-image: url('https://images.unsplash.com/photo-1647012815814-63bf190823ea?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+      height: 100vh;
+      width: 100vw;
+      z-index: -1;
+      background-size: cover;
+    }
+
+    .social-login {
+      margin-top: 20px;
+      animation: slideIn 0.8s ease-out 0.8s both;
+    }
+
+    .social-login button {
+      background-color: #db4437;
+      color: #fff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .social-login button img {
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+    }
+
+    .social-login button:hover {
+      background-color: #c33c2c;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="signup-container">
+    <div class="signup-form-wrapper">
+      <h1>Create an Account</h1>
+      <form action="/auth/signup" method="POST">
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit">Sign Up</button>
+        <% if (typeof error !=='undefined' ) { %>
+          <p class="error">
+            <%= error %>
+          </p>
+          <% } %>
+          <!-- <div class="social-login">
+            <button onclick="window.location.href='/auth/google'">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" alt="Google Logo">
+              Sign Up with Google
+            </button>
+          </div> -->
+      </form>
+      <div class="login-link">
+        <span>Already have an account?</span>
+        <a href="/auth/login">Log In</a>
+      </div>
+    </div>
+    <div class="nature-animation"></div>
+  </div>
+  <div class="leaf"></div>
+
+</body>
+
+</html>

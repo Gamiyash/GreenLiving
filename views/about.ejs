@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #333;
+            --text-color: #666;
+            --background-color: #f7f7f7;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .team {
+            background-color: var(--background-color);
+            padding: 50px;
+            text-align: center;
+        }
+
+        .team-members {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .member {
+            margin: 20px;
+            width: calc(25% - 20px);
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .member:hover {
+            transform: translateY(-5px);
+        }
+
+        .member img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-top: 20px;
+        }
+
+        .member h2 {
+            font-size: 18px;
+            margin-top: 10px;
+            color: var(--secondary-color);
+        }
+
+        .member p {
+            font-size: 14px;
+            color: var(--text-color);
+            padding: 0 20px 20px;
+        }
+
+        .email-btn {
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .email-btn:hover {
+            background-color: #3e8e41;
+        }
+
+        .motto {
+            background-color: var(--secondary-color);
+            color: #fff;
+            padding: 50px;
+            text-align: center;
+        }
+
+        .motto h1 {
+            font-size: 24px;
+        }
+
+        .motto p {
+            font-size: 18px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .team-members {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .member {
+                width: 80%;
+                max-width: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <%- include('header') %>
+    <section class="team">
+        <h1>Meet Our Team</h1>
+        <div class="team-members">
+            <div class="member">
+                <img src="https://picsum.photos/200/301?random=2" alt="John Doe">
+                <h2>John Doe</h2>
+                <button class="email-btn" onclick="mailto('john.doe@example.com')">Email</button>
+            </div>
+            <div class="member">
+                <img src="https://picsum.photos/200/301" alt="Jane Doe">
+                <h2>Jane Doe</h2>
+                <button class="email-btn" onclick="mailto('jane.doe@example.com')">Email</button>
+            </div>
+            <div class="member">
+                <img src="https://picsum.photos/200/302" alt="Bob Smith">
+                <h2>Bob Smith</h2>
+               
+                <button class="email-btn" onclick="mailto('bob.smith@example.com')">Email</button>
+            </div>
+            <div class="member">
+                <img src="https://picsum.photos/200/303" alt="Alice Johnson">
+                <h2>Alice Johnson</h2>
+            
+                <button class="email-btn" onclick="mailto('alice.johnson@example.com')">Email</button>
+            </div>
+        </div>
+    </section>
+    <section class="motto">
+        <h1>Our Motto</h1>
+        <p>"Empowering innovation through simplicity and design."</p>
+    </section>
+</body>
+</html>

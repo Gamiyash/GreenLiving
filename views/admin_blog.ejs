@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Blog</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+<style>
+
+
+.blog{
+    background-color: rgba(27, 211, 27, 0.11) ;
+    color: white;
+    padding-left:10px ;
+}
+.blog:hover{
+    background-color: rgba(64, 235, 64, 0.217) ;
+    color: white;
+}
+
+</style>
+</head>
+<body class="h-full">
+    <div class="flex h-screen bg-green-50">
+     <%- include('deshbordsidebar') %>
+        </div>
+        <div class="ml-64 p-8 w-full">
+            <h1 class="text-3xl font-bold text-green-800 mb-4">Add Blog</h1>
+            <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                <form action="/admin/add-blog" method="POST" class="w-full">
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-bold mb-2" for="title">
+                            Title:
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="title" type="text" name="title" required>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-bold mb-2" for="des">
+                            Description:
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="des" type="text" name="des" required>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-bold mb-2" for="title2">
+                            Title 2:
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="title2" type="text" name="title2">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-bold mb-2" for="des2">
+                            Description 2:
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="des2" type="text" name="des2">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-bold mb-2" for="mainimg">
+                            Main Image URL:
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="mainimg" type="url" name="mainimg" required>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-bold mb-2" for="logo">
+                            Logo URL:
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="logo" type="url" name="logo" required>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-bold mb-2" for="img1">
+                            Image 1 URL:
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="img1" type="url" name="img1">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-bold mb-2" for="img2">
+                            Image 2 URL:
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="img2" type="url" name="img2">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-bold mb-2" for="img3">
+                            Image 3 URL:
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="img3" type="url" name="img3">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-bold mb-2" for="img4">
+                            Image 4 URL:
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="img4" type="url" name="img4">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-bold mb-2" for="img5">
+                            Image 5 URL:
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="img5" type="url" name="img5">
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                            Add Data
+                        </button>
+                    </div>
+                </form>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarLinks = document.querySelectorAll('.sidebar-link');
+            const currentURL = window.location.pathname;
+    
+            sidebarLinks.forEach(link => {
+                if (link.href.includes(currentURL)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+    
+</body>
+</html>

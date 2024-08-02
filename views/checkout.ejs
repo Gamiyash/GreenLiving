@@ -1,0 +1,141 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Green Living</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <style>
+        .dark-mode {
+            background-color: black;
+            color: rgb(0, 0, 0);
+        }
+        .dark-mode .txt {
+            background-color: black;
+            color: rgb(255, 255, 255);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <div class="container mx-auto px-4 py-8 max-w-3xl">
+        <h1 class="text-3xl font-bold txt">Checkout</h1>
+        <div id="checkout-summary" class="space-y-4"></div>
+        <div id="total-amount" class="text-xl font-semibold mt-6 text-right txt"></div>
+        <!-- <form class="checkout-form mt-6" action="/process-checkout" method="POST">
+            <input type="hidden" name="cart" id="cartData" value="">
+            <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded text-sm focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
+                Confirm and Pay
+            </button>
+        </form> -->
+        <p class="mt-4 text-center text-sm txt"> pay with Razorpay:</p>
+        <button id="pay-button" class="w-full mt-2 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-sm focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
+            Pay Now with Razorpay
+        </button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const checkoutSummary = document.getElementById('checkout-summary');
+            const totalAmountElement = document.getElementById('total-amount');
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            if (cart.length === 0) {
+                checkoutSummary.innerHTML = '<p class="text-center">Your cart is empty.</p>';
+                return;
+            }
+
+            let total = 0;
+            cart.forEach(item => {
+                let price = parseFloat(item.price);
+                let quantity = parseInt(item.quantity) || 1;
+
+                if (isNaN(price)) price = 0;
+                if (isNaN(quantity)) quantity = 1;
+
+                const itemTotal = price * quantity;
+                total += itemTotal;
+
+                const cartItem = document.createElement('div');
+                cartItem.className = 'flex justify-between items-center p-3 bg-white rounded-lg shadow';
+                cartItem.innerHTML = `
+                    <div>
+                        <h3 class="font-semibold text-sm">${item.name}</h3>
+                        <p class="text-xs text-gray-600">Price: ₹${price} | Quantity: ${quantity}</p>
+                    </div>
+                    <div class="font-semibold text-sm">₹${itemTotal}</div>
+                `;
+                checkoutSummary.appendChild(cartItem);
+            });
+
+            totalAmountElement.textContent = `Total: ₹${total}`;
+            document.getElementById('cartData').value = JSON.stringify(cart);
+        });
+       
+        document.getElementById('pay-button').addEventListener('click', function () {
+            const total = parseFloat(document.getElementById('total-amount').textContent.replace('Total: ₹', '')) * 100;
+            fetch('/create-order', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ amount: total })
+            })
+            .then(response => response.json())
+            .then(data => {
+                var options = {
+                    key: 'rzp_test_TD4lYm7Ysbe87u',
+                    amount: data.amount,
+                    currency: 'INR',
+                    name: 'Green Living',
+                    description: 'Purchase',
+                    image: 'https://firebasestorage.googleapis.com/v0/b/greenlander-c8556.appspot.com/o/logo-icon.png?alt=media&token=7ee18bf1-5432-452b-8c2d-9eb5668bdc8e',
+                    order_id: data.id,
+                    handler: function (response) {
+                        fetch('/verify-payment', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                orderId: response.razorpay_order_id,
+                                paymentId: response.razorpay_payment_id,
+                                signature: response.razorpay_signature
+                            })
+                        })
+                        .then(response => response.json())
+                        .then(result => {
+                            if (result.success) {
+                                alert('Payment successful! Your Order is Delivered Within 1 Day');
+                                window.location.href = '/order-history';
+                            } else {
+                                alert('Payment verification failed!');
+                            }
+                        });
+                    },
+                    prefill: {
+                        name: '',
+                        email: '',
+                        contact: ''
+                    },
+                    notes: {
+                        address: ''
+                    },
+                    theme: {
+                        color: '#10B981'
+                    }
+                };
+
+                var rzp1 = new Razorpay(options);
+                rzp1.open();
+            })
+            .catch(error => {
+                            console.error('Error initiating payment:', error);
+                        });
+                    });
+               
+    </script>
+</body>
+</html>

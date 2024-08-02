@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Green Living Blog</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .prose img {
+        margin-top: 1.5em;
+        margin-bottom: 1.5em;
+      }
+      .dark-mode {
+        background-color: black;
+      }
+      .dark-mode .blog {
+        background-color: rgba(16, 15, 15, 0.653);
+        color: white;
+      }
+      .dark-mode #user-comments,.cmt {
+        color: white;
+      }
+      
+      
+      .dark-mode .email{
+        color: black;
+      }
+      .comment-section , #comments-section {
+      margin-top: 40px;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+    }
+    .comment-form {
+      margin-bottom: 20px;
+    }
+    .comment-list {
+      list-style-type: none;
+      padding: 20px;
+      margin: auto5px;
+    }
+    .comment-item {
+      background-color: white;
+      padding: 10px;
+      margin-left: 30px;
+      margin-bottom: 10px;
+      border-radius: 4px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .pic{
+      display: flex;
+      justify-content: center;
+    }
+    .dark-mode .comment-section{
+      background-color: black;
+      color: white;
+    
+    }
+    .dark-mode #comments-section{
+      background-color: rgb(5, 4, 4);
+      color: white;
+    
+    }
+    .dark-mode #comment-input{
+      background-color: rgb(0, 0, 0);
+      color: rgb(255, 255, 255);
+    
+    }
+    .dark-mode #comment-form{
+  background-color: rgb(6, 6, 6);
+  color: white;
+}
+ .dark-mode #user-comments{
+  background-color: rgb(11, 11, 11);
+  color: #f4f4f4;
+  margin: 20px 0;
+ }    
+ .dark-mode .section{
+  margin: 20px 0;
+  background-color: rgba(9, 9, 9, 0.607);
+  width: 100%;
+  border-radius: 10px;
+ }
+ .wst{
+  padding: 10px;
+ }
+ .wst-title{
+ font-size: 20px;
+ font-weight: 500;
+ text-decoration: underline;
+ }
+  
+    </style>
+  </head>
+  <body >
+    <div>
+      <button id="darkModeToggle" class="dark-mode-toggle-input"></button>
+    </div>
+    <main class="container mx-auto px-4 py-8">
+      <div class="max-w-4xl mx-auto">
+        <button id="back" class="mb-4 text-green-600 hover:text-green-700">
+          ← Back
+        </button>
+
+        <article class="blog bg-white shadow-lg rounded-lg overflow-hidden">
+          <img
+            src="<%= post.imageUrl %>"
+            alt="<%= post.title %>"
+            class="w-full h-fit object-fill"
+            id="main-image"
+          />
+          <div class="p-6">
+            <div class="flex items-center text-sm text-gray-600 mb-4">
+              <span>By Green Living</span>
+              <span class="mx-2">|</span>
+              <time datetime="2024-07-25">July 25, 2024</time>
+            </div>
+            <h1 class="text-3xl font-bold mb-4"><%= post.title %></h1>
+            <div class="prose max-w-none">
+              <p><%- post.des %></p>
+              <img
+                src="<%= post.img1 %>"
+                alt="<%= post.title %>"
+                class="my-4 pic"
+              />
+              <h2 class="text-2xl font-bold mt-6 mb-4"><%= post.title2 %></h2>
+              <img
+                src="<%= post.img2 %>"
+                alt="<%= post.title %>"
+                class="my-4 pic"
+              />
+              <% if (post && post.des2) { %>
+                <%- post.des2 %>
+              <% } else { %>
+                <p>No waste data available.</p>
+              <% } %>
+                
+              <img src="<%= post.img3 %>" alt="" class="my-4 pic" />
+
+              <h1 class="text-2xl font-bold mt-6 mb-4"><%= post.title3 %></h1>
+              <img src="<%= post.img4 %>" alt="" class="my-4 pic" />
+              <p><%- post.des3 %></p>
+
+
+              <img src="<%= post.img5 %>" alt="" class="my-4 pic" />
+            </div>
+          </div>
+        </article>
+      </div>
+    </main>
+
+    <div class="comment-section">
+      <h2 class="text-2xl font-bold mb-4 text-gray-800">Comments</h2>
+      
+      <form id="comment-form" class="comment-form bg-white p-4 border border-gray-200 rounded-lg shadow-sm">
+        <textarea id="comment-input" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none" rows="4" placeholder="Write your comment here"></textarea>
+        <button type="submit" class="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 transition duration-300 ease-in-out">Submit Comment</button>
+      </form>
+      
+      <!-- <ul id="comment-list" class="comment-list mt-6 space-y-4">
+        
+      </ul> -->
+    </div>
+    
+
+    <!-- Comments Section -->
+    <div id="comments-section" class="mt-8">
+      <h2 class="text-2xl font-bold mb-4">Comments</h2>
+      <div id="user-comments">
+        <% comments.forEach(function(comment) { %>
+          <div class=" shadow-md rounded px-8 pt-6 pb-8 section">
+            <p class="font-bold"><%= comment.userName %></p>
+            <p><%= comment.comment %></p>
+            <p class="text-sm text-gray-600"><%= new Date(comment.createdAt).toLocaleString() %></p>
+          </div>
+        <% }); %>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+const back = document.getElementById('back');
+
+back.addEventListener('click', () => {
+  window.history.back();
+});
+
+  // Dark mode toggle
+  function applyDarkModePreference() {
+  const isDarkMode = localStorage.getItem('darkMode') === 'true';
+  const body = document.body;
+
+  if (isDarkMode) {
+    body.classList.add('dark-mode');
+  } else {
+    body.classList.remove('dark-mode');
+  }
+}
+
+window.addEventListener('load', applyDarkModePreference);
+  const darkModeToggle = document.getElementById('darkModeToggle');
+  const body = document.body;
+
+  darkModeToggle.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+  });
+
+  // Comment form submission
+  const commentForm = document.getElementById('comment-form');
+  const userComments = document.getElementById('user-comments');
+
+  commentForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const comment = document.getElementById('comment-input').value;
+    const postId = '<%= post._id %>'; // The post ID is now available from the server-side render
+
+    try {
+      const response = await fetch('/api/comments', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ comment, postId }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit comment');
+      }
+
+      const newComment = await response.json();
+      addComment(newComment.userEmail,newComment.userName, newComment.comment, new Date(newComment.createdAt).toLocaleString());
+      commentForm.reset();
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Failed to submit comment. Please try again.');
+    }
+  });
+
+  function addComment( comment, date,name) {
+    const commentDiv = document.createElement('div');
+    commentDiv.className = 'shadow-md rounded px-8 pt-6 pb-8 mb-4 section';
+    commentDiv.innerHTML = `
+      <p class="font-bold">${name}</p>
+      <p>${comment}</p>
+      <p class="text-sm text-gray-600">${date}</p>
+    `;
+    userComments.prepend(commentDiv);
+  }
+</script>
+  </body>
+</html>

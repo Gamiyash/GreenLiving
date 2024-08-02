@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Profile</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background-color: rgba(240, 248, 255, 0.829)
+      ;
+      padding: 20px;
+      width: 60vw;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.712);
+      display: flex;
+    }
+
+    .profile-picture {
+      border-radius: 50%;
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      margin-right: 20px;
+    }
+
+    .profile-info {
+      flex: 1;
+      color: black;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    h2 {
+      color: #555;
+    }
+
+    p {
+      color: #151414;
+    }
+
+    label {
+      font-weight: bold;
+      color: #555;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+    .social-links a {
+      color: #007bff;
+      text-decoration: none;
+      margin-right: 10px;
+    }
+
+    .social-links a:hover {
+      text-decoration: underline;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    a {
+      display: block;
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+    <video  autoplay muted loop preload="auto">
+        <source  src="https://firebasestorage.googleapis.com/v0/b/greenlander-c8556.appspot.com/o/7265-199224749_medium.mp4?alt=media&token=5b60e203-7498-4016-b0b0-06f4c8f6a0ea"   
+     type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+  <div class="container">
+    <img src="/uploads/<%= user.profilePicture %>" alt="Profile Picture" class="profile-picture">
+    <div class="profile-info">
+      <h1><%= user.username %></h1>
+      <p><%= user.bio %></p>
+      <div>
+        <label for="email">Email:</label>
+        <p><%= user.email %></p>
+      </div>
+      <div class="social-links">
+        </div>
+      <div class="actions">
+        <a href="/user/profile/">Edit Profile</a>
+        </div>
+    </div>
+  </div>
+</body>
+</html>
