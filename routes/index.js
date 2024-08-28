@@ -107,7 +107,7 @@ router.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/auth/login' }),
   (req, res) => {
     req.session.user = req.user; // Save user info in session
-    res.redirect('/home'); // Redirect to the home page after successful login
+    res.redirect('/'); // Redirect to the home page after successful login
   }
 );
 

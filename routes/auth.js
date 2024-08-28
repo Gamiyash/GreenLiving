@@ -269,7 +269,7 @@ router.post('/verify-otp', async (req, res) => {
       sendLoginEmail(user.email, user.username);
 
       req.session.user = user;
-      return res.redirect('/home');
+      return res.redirect('/');
     } else {
       return res.status(400).render('otp', { error: 'Invalid or expired OTP', email });
     }
@@ -286,7 +286,7 @@ router.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   (req, res) => {
     req.session.user = req.user;
-    res.redirect('/home');
+    res.redirect('/');
   }
 );
 
