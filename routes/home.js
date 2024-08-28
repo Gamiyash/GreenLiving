@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 const Echo = require('../models/data');
 
-router.get('/', async (req, res) => {
+router.get('/error', async (req, res) => {
   try {
     const data = await Echo.findOne();
     if (data) {

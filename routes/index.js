@@ -121,7 +121,7 @@ router.get('/auth/logout', (req, res) => {
   });
 });
 
-router.get('/home', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const [data, events, items] = await Promise.all([
       Echo.find({}).limit(6),
